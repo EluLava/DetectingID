@@ -10,6 +10,8 @@ All the code is present in this folder:
 
 - 4_Simulating_ID.sh: Run inbreeding depression simulations
 
+- 5_subsampling_INDVs.sh: Subsample individuals (50, 100, 250 and 500) (ensuring we have structure) from the WORLD dataset and resimulate ID and quantify ID with different F.
+
 
 For the supplementary material where we filtered loci on MAF < 0.05, you can simply filter the bed matrix on MAF first and then rerun steps 1 to 4 with the new bed file.
 

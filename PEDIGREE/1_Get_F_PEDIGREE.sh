@@ -1,8 +1,11 @@
 #Create directory if does not exists
 mkdir -p VCFs
 
+#get 0 for second column of bim file
+awk '{print $1"\t"$2"\t"0"\t"int($4)"\t"$5"\t"$6}' ./data/bedmatrices/PGPED_ch_1_22.bim >> $$; mv $$ ./data/bedmatrices/PGPED_ch_1_22.bim
+
 #Pass from BED to VCF for ROHs and HBD segments estimation
-plink --bfile ./data/bedmatrices/PGPED_ch_1_22 --recode vcf iid bgz --out ./data/VCFs/PGPED
+plink --bfile ./data/bedmatrices/PGPED_ch_1_22 --recode vcf bgz --out ./data/VCFs/PGPED
 
 #index
 bcftools index ./data/VCFs/PGPED.vcf.gz
@@ -55,14 +58,14 @@ R --vanilla << EOF
       #Subset the data
       dtasub = dta100KB[dta100KB[,2] == indv,]
       #Estimate F
-      FROH.BCFTools.100KB[names(FROH.BCFTools.100KB) == indv] = sum(dtasub[,6])/3.2e9
+      FROH.BCFTools.100KB[names(FROH.BCFTools.100KB) == indv] = sum(dtasub[,6])/1e8
       
       ## 1MB
       
       #Subset the data
       dtasub = dta1MB[dta1MB[,2] == indv,]
       #Estimate F
-      FROH.BCFTools.1MB[names(FROH.BCFTools.1MB) == indv] = sum(dtasub[,6])/3.2e9
+      FROH.BCFTools.1MB[names(FROH.BCFTools.1MB) == indv] = sum(dtasub[,6])/1e8
       
     }
     
@@ -99,12 +102,12 @@ R --vanilla << EOF
       ## 100KB
       
       #Estimate F, divided by e6 becasue in KB
-      FROH.PLINK.100KB[names(FROH.PLINK.100KB) == indv] = dta100KB[,5][dta100KB[,2] == indv]/3.2e6
+      FROH.PLINK.100KB[names(FROH.PLINK.100KB) == indv] = dta100KB[,5][dta100KB[,2] == indv]/1e6
       
       ## 1MB
       
       #Estimate F
-      FROH.PLINK.1MB[names(FROH.PLINK.1MB) == indv] = dta1MB[,5][dta1MB[,2] == indv]/3.2e6
+      FROH.PLINK.1MB[names(FROH.PLINK.1MB) == indv] = dta1MB[,5][dta1MB[,2] == indv]/1e6
       
     }
     

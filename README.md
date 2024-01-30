@@ -10,6 +10,16 @@ contains all the scripts and data for the analyses for the three populations fro
 
 contains all the scripts and data for the analyses for the simulated PEDIGREE population
 
+## SUPP_TABLES
+
+contains the supplementary tables S2-S8
+
 ## PLOTTING folder
 
 contains all the scripts needed to create the different plots of the paper
+
+## SPARROW folder
+
+contains all the code necessary to run the analyses with empirical data
+
+data comes from this paper: https://www.pnas.org/doi/abs/10.1073/pnas.1909599117
